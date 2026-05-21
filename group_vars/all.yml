@@ -1,0 +1,101 @@
+# Fedora Cinnamon Workstation Provisioning Variables
+workstation_user: "{{ lookup('env','USER') }}"
+workstation_home: "/home/{{ workstation_user }}"
+
+# Set true only if you want Ansible to remove/disable overlapping virtualization stacks.
+cleanup_virtualization_overlap: true
+primary_virtualization_stack: "kvm_libvirt"
+
+# Core workstation packages based on your current setup and my cleanup recommendations.
+fedora_packages:
+  - ansible
+  - git
+  - vim-enhanced
+  - nano
+  - curl
+  - wget
+  - unzip
+  - zip
+  - jq
+  - xclip
+  - xdotool
+  - wmctrl
+  - tree
+  - htop
+  - fastfetch
+  - terminator
+  - tilix
+  - nemo
+  - cinnamon
+  - cinnamon-themes
+  - mint-y-theme
+  - mint-x-icons
+  - mint-y-icons
+  - papirus-icon-theme
+  - firewall-config
+  - firewalld
+  - fail2ban
+  - openssh-clients
+  - openssh-server
+  - flatpak
+  - gnome-software
+  - gnome-calculator
+  - blueman
+  - pavucontrol
+  - gparted
+  - timeshift
+  - python3
+  - python3-pip
+  - python3-virtualenv
+  - python3-psutil
+  - qemu-kvm
+  - qemu-img
+  - libvirt
+  - libvirt-daemon-driver-qemu
+  - virt-manager
+  - virt-install
+  - virt-viewer
+  - guestfs-tools
+  - edk2-ovmf
+  - swtpm
+  - samba
+  - cifs-utils
+  - google-chrome-stable
+  - brave-browser
+  - slack
+  - 1password
+
+flatpak_packages:
+  - org.gnome.World.PikaBackup
+
+services_enabled:
+  - firewalld
+  - fail2ban
+  - bluetooth
+  - chronyd
+  - NetworkManager
+  - libvirtd
+  - virtqemud
+
+services_disabled_cleanup:
+  - vboxservice
+  - vboxclient
+  - vmtoolsd
+  - vgauthd
+  - gdm
+
+# Services I recommend leaving disabled unless you actually need them.
+services_disabled_security:
+  - sshd
+  - cockpit
+
+# Optional packages to remove if you want pure Fedora/KVM and no VMware/VirtualBox overlap.
+remove_virtualization_overlap_packages:
+  - VirtualBox
+  - virtualbox
+  - akmod-VirtualBox
+  - open-vm-tools
+
+wallpaper_dir: "{{ workstation_home }}/Pictures/Wallpaper/Iron Man"
+wallpaper_file: "93c7a763633943dca01cd4dfeef36e5c.jpeg"
+wallpaper_source_path: "{{ wallpaper_dir }}/{{ wallpaper_file }}"
