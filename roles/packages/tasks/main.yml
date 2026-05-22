@@ -1,0 +1,10 @@
+- name: Install core packages
+  dnf:
+    name:
+      - git
+      - terminator
+      - vim
+      - curl
+      - htop
+      - fastfetch
+    state: present
